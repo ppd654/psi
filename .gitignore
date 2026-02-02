@@ -211,3 +211,5 @@ __marimo__/
 
 # Database
 *.sqlite3
+
+.DS_Store

@@ -1,0 +1,27 @@
+Para ejecutar los test debes tener en cuenta las siguientes consideraciones:
+
+0) El contenido de este repositorio debe copiarse en la raíz de vuestro projecto vue.
+1) En el fichero cypress.config.js están definidas varias variables como "username" y "password" que se usan en 
+   los diversos test así como la variable "baseUrl" que contiene la dirección donde se encuentra el servidor de vue 
+   (normalmente http://localhost:5173)
+2) En el fichero "cypress/support/commands.js" hay diversas funciones auxiliares que necesitan saber que versión 
+de python deben usar y donde está manage.py. Tenéis que actualizar estos valores para que sean correctos en vuestro sistema. 
+
+    const PYTHON = "/home/.../bin/python"
+    const MANAGE = "/home/.../manage.py"
+3) Los test hacen un uso intensivo de las atributos "data-cy". Por ejemplo, en el test test_login.cy.js la linea
+
+          cy.get('[data-cy=username]').type(Cypress.env('username'));
+
+  buscará el atributo "data-cy=username" en vuestro fichero login.vue y escribirá en el campo asociado 
+el valor de la variable "username" definido en "cypress.config.js"
+
+Así pues Login.vue debera tener un campo input (donde se teclea el username) parecido a
+
+                                           <input name="username" 
+                                                   ... 
+                                                   data-cy="username"
+                                                   ... />
+esto es, conteniendo el atributo 'data-cy="username"'
+
+

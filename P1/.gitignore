@@ -1,0 +1,16 @@
+# Entorno virtual
+p1_env/
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+
+# Base de datos SQLite
+*.sqlite3
+
+
+.env
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db

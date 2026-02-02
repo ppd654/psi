@@ -1,0 +1,35 @@
+describe('Initial website', () => {
+  it('passes', () => {
+    cy.visit('/')
+  })
+})
+
+describe('Formulario-persona', () => {
+  it('Body and div', () => {
+    cy.visit('/')
+    cy.get('body')
+    cy.get('div#formulario-persona')
+  })
+  
+   it('All components', () => {
+    cy.visit('/')
+    cy.get('[data-cy=name]')
+    cy.get('[data-cy=surname]')
+    cy.get('[data-cy=email]')
+    cy.get('[data-cy=add-button]')        
+  })
+  
+})
+
+describe('Tabla persona', () => {
+  it('Table', () => {
+    cy.visit('/')
+    cy.get('body')
+    cy.get('div#tabla-personas')
+  })
+  
+   it('All components', () => {
+    cy.visit('/')
+    cy.get('div#tabla-personas')
+  })
+})
