@@ -14,4 +14,7 @@
   {% else %}
     <p>There are no books in the library.</p>
   {% endif %}
+  {% if is_paginated %}
+  <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+  {% endif %}
 {% endblock %}
