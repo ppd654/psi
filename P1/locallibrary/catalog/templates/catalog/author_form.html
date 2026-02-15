@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  {# Usamos object para saber si estamos editando un autor que ya existe o creando uno nuevo #}
+  <h1>{% if object %}Editar{% else %}Crear{% endif %} Autor</h1>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <input type="submit" value="Guardar" />
+  </form>
+{% endblock %}

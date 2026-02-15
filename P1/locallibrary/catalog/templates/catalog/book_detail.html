@@ -23,6 +23,9 @@
         <p><strong>Due to be returned:</strong> {{ copy.due_back }}</p>
       {% endif %}
       <p><strong>Imprint:</strong> {{ copy.imprint }}</p>
+      {% if user.is_staff %}
+        <p><a href="{% url 'renew-book-librarian' copy.id %}">Renew book</a></p>
+      {% endif %}
       <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
     {% endfor %}
   </div>
