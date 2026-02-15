@@ -28,12 +28,12 @@
               {% if user.is_authenticated %}
                 <li class="text-success">User: {{ user.get_username }}</li>
                 
-                {# Enlace para bibliotecarios (ver prestados) #}
+                <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
+
                 {% if perms.catalog.can_mark_returned %}
                   <li><a href="{% url 'all-borrowed' %}">All borrowed</a></li>
                 {% endif %}
 
-                {# Enlaces para Staff (Crear registros) #}
                 {% if user.is_staff %}
                   <hr>
                   <li class="text-muted small">Staff Tools</li>
@@ -41,17 +41,20 @@
                   <li><a href="{% url 'book-create' %}">Create book</a></li>
                 {% endif %}
 
-                <li style="margin-top: 20px;">
-                  <form method="post" action="{% url 'logout' %}">
+                <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger btn-sm">Logout</button>
-                  </form>
-                </li>
+                </form>
+                
+                <li style="margin-top: 20px;">
+                  <button type="submit" form="logout-form" class="btn btn-danger btn-sm">Logout </button></li>
 
               {% else %}
+                <form id="login-form" method="get" action="{% url 'login' %}" style="display: none;">
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                </form>
+
                 <li style="margin-top: 20px;">
-                  <a href="{% url 'login' %}?next={{request.path}}" class="btn btn-primary btn-sm">Login</a>
-                </li>
+                  <button type="submit" form="login-form" class="btn btn-primary btn-sm">Login </button></li>
               {% endif %}
             </ul>
           {% endblock %}

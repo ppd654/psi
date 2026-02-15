@@ -16,7 +16,7 @@ import dj_database_url
 from dotenv import load_dotenv
 
 # Cargar variables del fichero .env
-load_dotenv() # 
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-clave-default-si-falla-el-env')
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'django-insecure-clave-default-si-falla-el-env'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Comprobamos si estamos en Render (nube). Si es así, apagamos el modo Debug.
@@ -103,7 +106,7 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa: E501
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
@@ -147,11 +150,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 if not DEBUG:
     # Redirigir todo el tráfico HTTP a HTTPS (W008)
     SECURE_SSL_REDIRECT = True
-    
+
     # Cookies seguras (W012 y W016)
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    
+
     # HSTS para forzar HTTPS en el navegador (W004)
     SECURE_HSTS_SECONDS = 31536000  # 1 año
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True

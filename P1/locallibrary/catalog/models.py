@@ -1,9 +1,11 @@
 import uuid
+from datetime import date
+
 from django.db import models
 from django.urls import reverse
 from django.db.models import UniqueConstraint
 from django.db.models.functions import Lower
-from django.conf import settings    
+from django.conf import settings
 
 
 class Genre(models.Model):
@@ -54,7 +56,11 @@ class Book(models.Model):
         help_text="Select a genre for this book"
     )
     language = models.ForeignKey(
-        'Language', on_delete=models.SET_NULL, null=True)
+        'Language', on_delete=models.SET_NULL, null=True
+    )
+
+    class Meta:
+        ordering = ['title']
 
     def __str__(self):
         """String for representing the Model object."""
@@ -63,7 +69,7 @@ class Book(models.Model):
     def get_absolute_url(self):
         """Returns the URL to access a detail record for this book."""
         return reverse('book-detail', args=[str(self.id)])
-    
+
     def display_genre(self):
         return ', '.join(genre.name for genre in self.genre.all()[:3])
 
@@ -81,8 +87,12 @@ class BookInstance(models.Model):
     book = models.ForeignKey('Book', on_delete=models.RESTRICT, null=True)
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
-    borrower = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
-
+    borrower = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
 
     LOAN_STATUS = (
         ('m', 'Maintenance'),
@@ -112,7 +122,6 @@ class BookInstance(models.Model):
     @property
     def is_overdue(self):
         """Determina si el libro está fuera de plazo."""
-        from datetime import date
         return bool(self.due_back and date.today() > self.due_back)
 
 
@@ -138,9 +147,11 @@ class Author(models.Model):
 
 class Language(models.Model):
     """Model representing a Language (e.g. English, French, Japanese, etc.)"""
-    name = models.CharField(max_length=200,
-                            unique=True,
-                            help_text="Enter the book's natural language")
+    name = models.CharField(
+        max_length=200,
+        unique=True,
+        help_text="Enter the book's natural language"
+    )
 
     def get_absolute_url(self):
         """Returns the url to access a particular language instance."""

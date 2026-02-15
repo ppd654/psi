@@ -1,0 +1,17 @@
+[flake8]
+# Excluir migraciones, entorno virtual, caché y configuración del sistema
+exclude =
+    */migrations/*,
+    p1_env,
+    venv,
+    .env,
+    __pycache__,
+    .git,
+    */tests/test_first_week.py,
+    */tests/test_second_week.py,
+    */tests/test_third_week.py,
+    populate_catalog.py
+
+# Permitir líneas un poco más largas (120 caracteres es el estándar moderno, 79 es muy antiguo)
+# Si tu profesor es estricto con 79, cambia 120 por 79.
+max-line-length = 120
