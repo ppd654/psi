@@ -13,3 +13,6 @@ python manage.py migrate
 
 # 4. Crear el superusuario automáticamente (usando el comando que creamos antes)
 python manage.py createsu
+
+# 5. Poblar la base de datos con el .py proporcionado
+python populate_catalog.py
