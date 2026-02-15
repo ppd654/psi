@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
+from dotenv import load_dotenv
+
+# Cargar variables del fichero .env
+load_dotenv() # 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +26,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xz@d*u#ihiktvy-5wnxtnhg-s(&63vp4&8b$od5#c1l8f*$c3i'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-clave-default-si-falla-el-env')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Comprobamos si estamos en Render (nube). Si es así, apagamos el modo Debug.
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    DEBUG = False
+else:
+    DEBUG = True
 
+# Permitimos el host de Render y localhost
 ALLOWED_HOSTS = []
-
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+else:
+    ALLOWED_HOSTS.append('*')
 
 # Application definition
 

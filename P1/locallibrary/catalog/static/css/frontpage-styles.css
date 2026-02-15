@@ -1,0 +1,39 @@
+/* catalog/static/css/frontpage-styles.css */
+
+/* Eliminamos los puntos de la lista por defecto */
+.dynamic-content-list {
+    list-style-type: none; 
+    padding: 0;
+    counter-reset: my-counter; /* Iniciamos un contador */
+}
+
+/* Estilo de cada caja (el recuadro amarillo de la Figura 1) */
+.dynamic-content-list li {
+    background-color: #fff3cd; /* Color de fondo amarillo claro */
+    border: 1px solid #ffeeba; /* Borde un poco más oscuro */
+    color: #856404;            /* Texto marrón oscuro */
+    margin-bottom: 10px;       /* Espacio entre cajas */
+    padding: 15px;             /* Espacio interno */
+    border-radius: 5px;        /* Bordes redondeados */
+    font-weight: bold;
+    position: relative;
+    padding-left: 50px;        /* Espacio para el número */
+}
+
+/* El número dentro del recuadro (generado automáticamente) */
+.dynamic-content-list li::before {
+    counter-increment: my-counter;          /* Incrementa el número */
+    content: counter(my-counter);           /* Muestra el número */
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #ffdf7e;              /* Fondo del número */
+    color: #533f03;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;                      /* Centrar verticalmente */
+    border-radius: 50%;                     /* Hacerlo circular o cuadrado */
+    font-weight: bold;
+}

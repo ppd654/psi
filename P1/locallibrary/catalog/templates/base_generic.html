@@ -24,26 +24,34 @@
               <li><a href="{% url 'authors' %}">All authors</a></li>
 
               <hr>
+
               {% if user.is_authenticated %}
-                <li>User: {{ user.get_username }}</li>
+                <li class="text-success">User: {{ user.get_username }}</li>
                 
+                {# Enlace para bibliotecarios (ver prestados) #}
                 {% if perms.catalog.can_mark_returned %}
                   <li><a href="{% url 'all-borrowed' %}">All borrowed</a></li>
+                {% endif %}
+
+                {# Enlaces para Staff (Crear registros) #}
+                {% if user.is_staff %}
                   <hr>
-                  <li class="text-muted">Staff Tools</li>
-                  {# NUEVO: Enlaces para crear registros #}
+                  <li class="text-muted small">Staff Tools</li>
                   <li><a href="{% url 'author-create' %}">Create author</a></li>
                   <li><a href="{% url 'book-create' %}">Create book</a></li>
                 {% endif %}
 
-                <li>
+                <li style="margin-top: 20px;">
                   <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-link nav-link" style="display:inline; cursor:pointer; padding:0;">Logout</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Logout</button>
                   </form>
                 </li>
+
               {% else %}
-                <li><a href="{% url 'login' %}?next={{request.path}}">Login</a></li>
+                <li style="margin-top: 20px;">
+                  <a href="{% url 'login' %}?next={{request.path}}" class="btn btn-primary btn-sm">Login</a>
+                </li>
               {% endif %}
             </ul>
           {% endblock %}
@@ -72,5 +80,12 @@
         </div>
       </div>
     </div>
+
+    <footer class="container-fluid text-center mt-5 p-4" style="background-color: #f8f9fa; border-top: 1px solid #e9ecef;">
+        <p class="text-muted">
+            Page created by: <strong>Hugo Martinez and Daniel Perez</strong>
+        </p>
+    </footer>
+
   </body>
 </html>

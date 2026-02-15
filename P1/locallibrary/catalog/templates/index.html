@@ -10,7 +10,7 @@
   </p>
   <h2>Dynamic content</h2>
   <p>The library has the following record counts:</p>
-  <ul>
+  <ul class="dynamic-content-list">
     <li><strong>Books:</strong> {{ num_books }}</li>
     <li><strong>Copies:</strong> {{ num_instances }}</li>
     <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
@@ -20,4 +20,10 @@
 <p>
   You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
 </p>
+{% endblock %}
+
+{% block title %}
+  <title>Local Library Home</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/frontpage-styles.css' %}">
 {% endblock %}
