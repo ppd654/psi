@@ -11,8 +11,10 @@ python manage.py collectstatic --no-input
 # 3. Aplicar las migraciones a la base de datos de la nube
 python manage.py migrate
 
+python manage.py flush --no-input
+
+python populate_catalog.py
+
 # 4. Crear el superusuario automáticamente (usando el comando que creamos antes)
 python manage.py createsu
 
-# 5. Poblar la base de datos con el .py proporcionado
-python populate_catalog.py
